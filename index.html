@@ -54,8 +54,6 @@
       }
 
       .hand {
-        width: 50%;
-        height: 6px;
         background: black;
         position: absolute;
         top: 50%;
@@ -64,21 +62,78 @@
         transition: all 0.05s;
         transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
       }
+
+      .hour-hand {
+        width: 40%;
+        height: 6px;
+        left: 10%;
+      }
+
+      .min-hand {
+        width: 50%;
+        height: 6px;
+      }
+
+      .second-hand {
+        width: 50%;
+        height: 4px;
+      }
     </style>
 
     <script>
+      // const secondHand = document.querySelector(".second-hand");
+      // const minsHand = document.querySelector(".min-hand");
+      // const hoursHand = document.querySelector(".hour-hand");
+
+      // let totalSeconds = 0;
+
+      // function setDate() {
+      //   totalSeconds++;
+      //   const now = new Date();
+
+      //   const seconds = now.getSeconds();
+      //   const secondsDegrees = (totalSeconds / 60) * 360 + 90;
+
+      //   const mins = now.getMinutes();
+      //   const minsDegrees = (mins / 60) * 360 + 90;
+
+      //   const hours = now.getHours();
+      //   const hoursDegrees = (hours / 12) * 360 + 90;
+
+      //   secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+      //   minsHand.style.transform = `rotate(${minsDegrees}deg)`;
+      //   hoursHand.style.transform = `rotate(${hoursDegrees}deg)`;
+      // }
+
+      // setInterval(setDate, 1000);
+      // setDate();
       const secondHand = document.querySelector(".second-hand");
-      const minuteHand = document.querySelector(".minute-hand");
+      const minsHand = document.querySelector(".min-hand");
+      const hoursHand = document.querySelector(".hour-hand");
+
+      const now = new Date();
+      console.log(now);
+      let totalSeconds =
+        now.getSeconds() + now.getMinutes() * 60 + now.getHours() * 3600; // Initialize based on the current time
 
       function setDate() {
-        const now = new Date();
-        const seconds = now.getSeconds();
-        const secondsDegrees = (seconds / 60) * 360 + 90;
+        totalSeconds++; // Increment totalSeconds by 1 every time the function runs
 
-        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+        const continuousSecondsDegrees = (totalSeconds / 60) * 360 + 90; // Use totalSeconds for continuous rotation
+
+        const mins = now.getMinutes();
+        const minsDegrees = (mins / 60) * 360 + 90;
+
+        const hours = now.getHours();
+        const hoursDegrees = (hours / 12) * 360 + 90;
+
+        secondHand.style.transform = `rotate(${continuousSecondsDegrees}deg)`;
+        minsHand.style.transform = `rotate(${minsDegrees}deg)`;
+        hoursHand.style.transform = `rotate(${hoursDegrees}deg)`;
       }
 
       setInterval(setDate, 1000);
+      setDate();
     </script>
   </body>
 </html>
